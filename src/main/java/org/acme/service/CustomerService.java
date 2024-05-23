@@ -31,9 +31,14 @@ public class CustomerService {
 
     public void changeCustomer(Long id, CustomerDTO customerDTO){
 
-        CustomerEntity customerEntity = repository.findById(id);
-        customerEntity = mapCustomerDTOToEntity(customerDTO);
-        repository.persist(customerEntity);
+        CustomerEntity customer = repository.findById(id);
+        customer.setEmail(customerDTO.getEmail());
+        customer.setPhone(customerDTO.getPhone());
+        customer.setAddress(customerDTO.getAddress());
+        customer.setAge(customerDTO.getAge());
+        customer.setName(customerDTO.getName());
+
+        repository.persist(customer);
     }
 
     public void deleteCustomer(Long id){
@@ -47,7 +52,7 @@ public class CustomerService {
         customer.setEmail(customerDTO.getEmail());
         customer.setPhone(customerDTO.getPhone());
         customer.setAddress(customerDTO.getAddress());
-        customer.setAge(customer.getAge());
+        customer.setAge(customerDTO.getAge());
         customer.setName(customerDTO.getName());
 
         return  customer;
@@ -59,8 +64,8 @@ public class CustomerService {
         customerDTO.setAddress(customerEntity.getAddress());
         customerDTO.setAge(customerEntity.getAge());
         customerDTO.setName(customerEntity.getName());
-        customerDTO.setPhone(customerDTO.getPhone());
-        customerDTO.setEmail(customerDTO.getEmail());
+        customerDTO.setPhone(customerEntity.getPhone());
+        customerDTO.setEmail(customerEntity.getEmail());
 
         return customerDTO;
     }
