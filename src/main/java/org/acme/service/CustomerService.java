@@ -70,4 +70,7 @@ public class CustomerService {
         return customerDTO;
     }
 
+    public CustomerDTO findCustomerById(Long id) {
+        return mapCustomerEntityToDTO(repository.findById(id));
+    }
 }
